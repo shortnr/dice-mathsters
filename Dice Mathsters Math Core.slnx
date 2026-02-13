@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="../DiceMathstersCoreTests/DiceMathstersCoreTests.csproj" Id="9ea79db3-653a-44d7-84ea-94baae73e698" />
+  <Project Path="../DiceMathstersTestHarness/DiceMathstersTestHarness.csproj" Id="3b839d5c-28ab-4a3e-9061-a0f1a39909be" />
+  <Project Path="DiceMathstersCore.csproj" />
+</Solution>
