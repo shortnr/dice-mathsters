@@ -36,7 +36,7 @@ namespace DiceMathsters.Core
         private readonly MathExpression opA;
         private readonly MathExpression opB;
 
-        public float Result { get; set; }
+        public double Result { get; set; }
 
         public BinaryMathExpression(OperationType type, MathExpression opA, MathExpression opB)
         {
@@ -47,13 +47,16 @@ namespace DiceMathsters.Core
 
         public override double Evaluate()
         {
+            double resA = opA.Evaluate();
+            double resB = opB.Evaluate();
+
             return type switch
             {
-                OperationType.Add => opA.Evaluate() + opB.Evaluate(),
-                OperationType.Subtract => opA.Evaluate() - opB.Evaluate(),
-                OperationType.Multiply => opA.Evaluate() * opB.Evaluate(),
-                OperationType.Divide => opB.Evaluate() == 0 ? throw new DivideByZeroException("Cannot divide by zero.") : opA.Evaluate() / opB.Evaluate(),
-                OperationType.Exponentiate => Math.Pow(opA.Evaluate(), opB.Evaluate()),
+                OperationType.Add => resA + resB,
+                OperationType.Subtract => resA - resB,
+                OperationType.Multiply => resA * resB,
+                OperationType.Divide => resB == 0 ? throw new DivideByZeroException("Cannot divide by zero.") : resA / resB,
+                OperationType.Exponentiate => Math.Pow(resA, resB),
                 _ => throw new NotImplementedException()
             };
         }
