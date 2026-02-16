@@ -8,6 +8,11 @@ namespace DiceMathstersCoreTests
         [Theory]
         [InlineData("3", 3)]
         [InlineData("-3", -3)]
+        [InlineData("2--3", 5)]
+        [InlineData("2+-3", -1)]
+        [InlineData("-(3 + 4)", -7)]
+        [InlineData("-(2 + (3 + 4))", -9)]
+        [InlineData("2^-3", 0.125)]
         [InlineData("3 + 4 + 1", 8.0)]
         [InlineData("2 * 3 + 4", 10.0)]
         [InlineData("2 + 3 * 4", 14.0)]
@@ -44,6 +49,7 @@ namespace DiceMathstersCoreTests
         [InlineData("2 + )3(")]
         [InlineData("")]
         [InlineData("   ")]
+        [InlineData("2-*3")]
         public void ExpressionBuilder_FromStringFail(string expressionString)
         {
             Tokenizer tokenizer = new();
