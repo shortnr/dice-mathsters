@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DiceMathsters.Core
+﻿namespace DiceMathsters.Core
 {
     public enum OperationType
     {
