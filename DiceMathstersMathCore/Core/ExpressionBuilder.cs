@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DiceMathsters.Core
 {
@@ -28,9 +27,15 @@ namespace DiceMathsters.Core
         /// </exception>
         public MathExpression BuildExpressionFromTokens(IReadOnlyList<Token> tokens)
         {
+            int parentesisBalance = 0;
+
             // Track the last token type to handle implicit multiplication and validate the expression structure
             bool lastTokenWasRightParenthesis = false;
             bool lastTokenWasNumber = false;
+            bool lastTokenWasOperator = false;
+
+            bool negationNeeded = false;
+            bool negateNextExpression = false;
 
             // Stacks for output expressions and operators
             Stack<MathExpression> output = new();
@@ -45,48 +50,86 @@ namespace DiceMathsters.Core
                     // If the token is a number, create a UnaryMathExpression and push it to the output stack
                     case TokenType.Number:
                         if (lastTokenWasNumber)
+                        {
                             throw new Exception("Invalid expression: two numbers in a row without an operator.");
+                        }
 
                         if (lastTokenWasRightParenthesis)
+                        {
                             operators.Push(new Token(TokenType.Operator, "*"));
+                        }
 
-                        output.Push(new UnaryMathExpression(int.Parse(token.Value)));
+                        if (negationNeeded)
+                        {
+                            output.Push(new NegatedMathExpression(new UnaryMathExpression(int.Parse(token.Value))));
+                            negationNeeded = false;
+                        }
+                        else
+                        {
+                            output.Push(new UnaryMathExpression(int.Parse(token.Value)));
+                        }
 
                         lastTokenWasRightParenthesis = false;
+                        lastTokenWasOperator = false;
                         lastTokenWasNumber = true;
                         break;
 
                     // If the token is an operator, pop operators from the stack to the output stack based on precedence
                     case TokenType.Operator:
-                        while (operators.Count > 0 && operators.Peek().Type == TokenType.Operator &&
-                           GetPrecedence(operators.Peek().Value) >= GetPrecedence(token.Value))
+                        if (token.Value == "-" && (lastTokenWasOperator || output.Count == 0))
                         {
-                            var op = operators.Pop();
-                            try
-                            {
-                                var right = output.Pop();
-                                var left = output.Pop();
-                                output.Push(new BinaryMathExpression(GetOperationType(op.Value), left, right));
-                            }
-                            catch
-                            {
-                                throw new Exception("Invalid expression: not enough operands for operator " + op.Value);
-                            }
+                            negationNeeded = true;
                         }
-                        operators.Push(token);
+                        else
+                        {
+                            while (operators.Count > 0 && operators.Peek().Type == TokenType.Operator &&
+                                GetPrecedence(operators.Peek().Value) >= GetPrecedence(token.Value))
+                            {
+                                var op = operators.Pop();
+                                try
+                                {
+                                    var right = output.Pop();
+                                    var left = output.Pop();
+                                    //if (negateNextNumberOrExpression)
+                                    //{
+                                    //    output.Push(new NegatedMathExpression(new BinaryMathExpression(GetOperationType(op.Value), left, right)));
+                                    //    negateNextNumberOrExpression = false;
+                                    //}
+                                    //else
+                                    //{
+                                    output.Push(new BinaryMathExpression(GetOperationType(op.Value), left, right));
+                                    //}
+                                }
+                                catch
+                                {
+                                    throw new Exception("Invalid expression: not enough operands for operator " + op.Value);
+                                }
+                            }
+                            operators.Push(token);
+                        }
 
                         lastTokenWasRightParenthesis = false;
                         lastTokenWasNumber = false;
+                        lastTokenWasOperator = true;
                         break;
 
                     // If the token is a left parenthesis, push it to the operator stack. Handle implicit multiplication if necessary.
                     case TokenType.LeftParenthesis:
+                        parentesisBalance++;
+
+                        if (negationNeeded)
+                        {
+                            negateNextExpression = true;
+                            negationNeeded = false;
+                        }
+
                         if (lastTokenWasRightParenthesis || lastTokenWasNumber)
                             operators.Push(new Token(TokenType.Operator, "*"));
 
                         operators.Push(token);
 
                         lastTokenWasRightParenthesis = false;
+                        lastTokenWasOperator = false;
                         lastTokenWasNumber = false;
                         break;
 
@@ -111,8 +154,16 @@ namespace DiceMathsters.Core
                             throw new Exception("Mismatched parentheses.");
                         }
                         operators.Pop(); // Pop the left parenthesis
+                        parentesisBalance--;
+
+                        if (negateNextExpression && (parentesisBalance == 0))
+                        {
+                            output.Push(new NegatedMathExpression(output.Pop()));
+                            negateNextExpression = false;
+                        }    
 
                         lastTokenWasRightParenthesis = true;
+                        lastTokenWasOperator = false;
                         lastTokenWasNumber = false;
                         break;
 
