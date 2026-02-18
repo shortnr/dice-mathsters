@@ -6,7 +6,7 @@ namespace DiceMathsters.Core
 {
     public class Tokenizer
     {
-        public IReadOnlyList<Token> Tokenize(string expression)
+        public static IReadOnlyList<Token> Tokenize(string expression)
         {
             List<Token> _tokens = new();
 
@@ -27,21 +27,41 @@ namespace DiceMathsters.Core
                         number.Append(expression[i]);
                         i++;
                     }
-                    _tokens.Add(new Token(TokenType.Number, number.ToString()));
+                    _tokens.Add(Token.Number(int.Parse(number.ToString())));
                 }
-                else if ("+-*/^".Contains(current))
+                else if (current == '+')
                 {
-                    _tokens.Add(new Token(TokenType.Operator, current.ToString()));
+                    _tokens.Add(Token.Operator(OperatorType.Add));
+                    i++;
+                }
+                else if (current == '-')
+                {
+                    _tokens.Add(Token.Operator(OperatorType.Subtract));
+                    i++;
+                }
+                else if (current == '*')
+                {
+                    _tokens.Add(Token.Operator(OperatorType.Multiply));
+                    i++;
+                }
+                else if (current == '/')
+                {
+                    _tokens.Add(Token.Operator(OperatorType.Divide));
+                    i++;
+                }
+                else if (current == '^')
+                {
+                    _tokens.Add(Token.Operator(OperatorType.Power));
                     i++;
                 }
                 else if (current == '(')
                 {
-                    _tokens.Add(new Token(TokenType.LeftParenthesis, current.ToString()));
+                    _tokens.Add(Token.LeftParen());
                     i++;
                 }
                 else if (current == ')')
                 {
-                    _tokens.Add(new Token(TokenType.RightParenthesis, current.ToString()));
+                    _tokens.Add(Token.RightParen());
                     i++;
                 }
                 else
@@ -49,6 +69,9 @@ namespace DiceMathsters.Core
                     throw new Exception($"Unexpected character: {current}");
                 }
             }
+
+            _tokens.Add(Token.End());
+
             return _tokens;
         }
     }

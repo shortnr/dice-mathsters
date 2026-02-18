@@ -1,12 +1,12 @@
 ﻿namespace DiceMathsters.Core
 {
-    public enum OperationType
+    public enum OperatorType
     {
         Add,
         Subtract,
         Multiply,
         Divide,
-        Exponentiate
+        Power
     }
 
     public abstract class MathExpression
