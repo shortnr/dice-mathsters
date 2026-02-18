@@ -1,7 +1,7 @@
 ﻿using DiceMathsters.Core;
 using Xunit;
 
-namespace DiceMathstersCoreTests
+namespace DiceMathstersMathCoreTests
 {
     public class ExpressionBuilderTests
     {
@@ -29,13 +29,25 @@ namespace DiceMathstersCoreTests
         [InlineData("2(3 + 4)", 14)]
         [InlineData("(2 + 3)4", 20)]
         [InlineData("2(3)(4)", 24)]
+        [InlineData("2^2^3", 256)]
+        [InlineData("(2^2)^3", 64)]
+        [InlineData("-2^2", -4)]
+        [InlineData("(-2)^2", 4)]
+        [InlineData("2^-2^2", 0.0625)]
+        [InlineData("8 / 4 / 2", 1)]
+        [InlineData("8 / 4 * 2", 4)]
+        [InlineData("((((3))))", 3)]
+        [InlineData("((2+3)*(1+(2)))", 15)]
+        [InlineData("-2(3)", -6)]
+        [InlineData("-(2)(3)", -6)]
+        [InlineData("0^0", 1)]
+        [InlineData("0^-1", double.PositiveInfinity)]
         public void ExpressionBuilder_FromStringPass(string expressionString, double expectedResult)
         {
-            Tokenizer tokenizer = new();
-            IReadOnlyList<Token> tokens = tokenizer.Tokenize(expressionString);
+            IReadOnlyList<Token> tokens = Tokenizer.Tokenize(expressionString);
 
             ExpressionBuilder expressionBuilder = new();
-            MathExpression expression = expressionBuilder.BuildExpressionFromTokens(tokens);
+            MathExpression expression = expressionBuilder.BuildExpression(tokens);
             Assert.Equal(expectedResult, expression.Evaluate());
         }
 
@@ -50,12 +62,19 @@ namespace DiceMathstersCoreTests
         [InlineData("")]
         [InlineData("   ")]
         [InlineData("2-*3")]
+        [InlineData("2^^3")]
+        [InlineData("2()")]
+        [InlineData(")")]
+        [InlineData("(")]
+        [InlineData("--")]
+        [InlineData("^-2")]
+        [InlineData("2^")]
         public void ExpressionBuilder_FromStringFail(string expressionString)
         {
-            Tokenizer tokenizer = new();
-            IReadOnlyList<Token> tokens = tokenizer.Tokenize(expressionString);
+            IReadOnlyList<Token> tokens = Tokenizer.Tokenize(expressionString);
+            
             ExpressionBuilder expressionBuilder = new();
-            Assert.Throws<Exception>(() => expressionBuilder.BuildExpressionFromTokens(tokens));
+            Assert.Throws<Exception>(() => expressionBuilder.BuildExpression(tokens));
         }
     }
 }

@@ -9,17 +9,36 @@ namespace DiceMathsters.Core
         Number,
         Operator,
         LeftParenthesis,
-        RightParenthesis
+        RightParenthesis,
+        End
     }
+
     public class Token
     {
-            public TokenType Type { get; }
-            public string Value { get; }
-    
-            public Token(TokenType type, string value)
-            {
-                Type = type;
-                Value = value;
+        public TokenType Type { get; }
+        public OperatorType? Op { get; }
+        public int? Num { get; }
+
+        private Token(TokenType type, OperatorType? op = null, int? number = null)
+        {
+            Type = type;
+            Op = op;
+            Num = number;
         }
+
+        public static Token Number(int value)
+            => new(TokenType.Number, number: value);
+
+        public static Token Operator(OperatorType op)
+            => new(TokenType.Operator, op: op);
+
+        public static Token LeftParen()
+            => new(TokenType.LeftParenthesis);
+
+        public static Token RightParen()
+            => new(TokenType.RightParenthesis);
+
+        public static Token End()
+            => new(TokenType.Operator, op: null);
     }
 }

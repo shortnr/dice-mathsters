@@ -4,13 +4,13 @@ namespace DiceMathsters.Core
 {
     public class BinaryMathExpression : MathExpression
     {
-        private readonly OperationType type;
+        private readonly OperatorType type;
         private readonly MathExpression opA;
         private readonly MathExpression opB;
 
         public double Result { get; set; }
 
-        public BinaryMathExpression(OperationType type, MathExpression opA, MathExpression opB)
+        public BinaryMathExpression(OperatorType type, MathExpression opA, MathExpression opB)
         {
             this.type = type;
             this.opA = opA;
@@ -24,11 +24,11 @@ namespace DiceMathsters.Core
 
             return type switch
             {
-                OperationType.Add => resA + resB,
-                OperationType.Subtract => resA - resB,
-                OperationType.Multiply => resA * resB,
-                OperationType.Divide => resB == 0 ? throw new DivideByZeroException("Cannot divide by zero.") : resA / resB,
-                OperationType.Exponentiate => Math.Pow(resA, resB),
+                OperatorType.Add => resA + resB,
+                OperatorType.Subtract => resA - resB,
+                OperatorType.Multiply => resA * resB,
+                OperatorType.Divide => resB == 0 ? throw new DivideByZeroException("Cannot divide by zero.") : resA / resB,
+                OperatorType.Power => Math.Pow(resA, resB),
                 _ => throw new NotImplementedException()
             };
         }
