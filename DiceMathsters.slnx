@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/DiceMathsters.MathCore/DiceMathsters.MathCore.csproj" />
+  <Project Path="tests/DiceMathsters.MathCore.Tests/DiceMathsters.MathCore.Tests.csproj" />
+  <Project Path="tools/DiceMathsters.TestBench/DiceMathsters.Testbench.csproj" />
+</Solution>

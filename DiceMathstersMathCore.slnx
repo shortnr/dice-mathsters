@@ -1,5 +1,0 @@
-<Solution>
-  <Project Path="DiceMathstersMathCore/DiceMathstersMathCore.csproj" />
-  <Project Path="DiceMathstersMathCoreTestbench/DiceMathstersMathCoreTestbench.csproj" Id="ce03f849-c975-4c55-be2b-f14bc43559d8" />
-  <Project Path="DiceMathstersMathCoreTests/DiceMathstersMathCoreTests.csproj" Id="9ea79db3-653a-44d7-84ea-94baae73e698" />
-</Solution>
