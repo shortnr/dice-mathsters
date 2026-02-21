@@ -3,48 +3,35 @@
 namespace DiceMathsters.Application
 {
     /// <summary>
-    /// Provides static methods for evaluating mathematical expressions represented as tokens or strings.
+    /// Provides static methods for evaluating mathematical expressions represented as strings or token lists.
     /// </summary>
-    /// <remarks>This class is sealed and cannot be inherited. It offers two static methods for evaluating
-    /// expressions: one that accepts a list of tokens and another that takes a string representation of the expression.
-    /// Both methods utilize an internal expression builder to construct and evaluate the expression. Use this class to
-    /// obtain the numerical result of a mathematical expression without needing to manually parse or evaluate the
-    /// expression yourself.</remarks>
-    public sealed class EvaluateExpressionHandler
+    /// <remarks>Use the Evaluate methods to compute the result of an expression. The input expression must be
+    /// valid; otherwise, exceptions may be thrown during evaluation. This class is thread-safe and can be used
+    /// concurrently across multiple threads.</remarks>
+    public static class ExpressionEvaluator
     {
         /// <summary>
-        /// Evaluates a mathematical expression represented by a sequence of tokens and returns the computed result.
+        /// Evaluates a mathematical expression represented as a string and returns the computed result as a double.
         /// </summary>
-        /// <remarks>The method requires that the token sequence forms a valid mathematical expression. If
-        /// the tokens are invalid or do not represent a complete expression, an exception may be thrown during
-        /// evaluation.</remarks>
-        /// <param name="tokens">A read-only list of tokens that define the mathematical expression to evaluate. Each token must be valid and
-        /// contribute to a well-formed expression.</param>
+        /// <remarks>This method uses a tokenizer to parse the expression before evaluation. Ensure that
+        /// the expression does not contain unsupported characters or formats.</remarks>
+        /// <param name="expression">The mathematical expression to evaluate. The expression must be valid and follow
+        /// the syntax rules supported by the tokenizer.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
-        public static double Handle(IReadOnlyList<Token> tokens)
-        {
-            var expressionBuilder = new ExpressionBuilder();
-            var expression = expressionBuilder.BuildExpression(tokens);
-            var result = expression.Evaluate();
-            return result;
-        }
+        public static double Evaluate(string expression)
+            => Evaluate(Tokenizer.Tokenize(expression));
 
         /// <summary>
-        /// Evaluates a mathematical expression provided as a string and returns the computed result as a double.
+        /// Evaluates a mathematical expression represented by a list of tokens and returns the computed result.
         /// </summary>
-        /// <remarks>This method parses the input string into tokens and constructs an evaluable
-        /// expression. Ensure that the input string adheres to the expected format to avoid evaluation
-        /// errors.</remarks>
-        /// <param name="expressionString">The string representation of the mathematical expression to evaluate. The expression must be properly
-        /// formatted and may include numbers, operators, and parentheses.</param>
+        /// <remarks>This method constructs an expression from the provided tokens and evaluates it.
+        /// Ensure that the tokens are correctly formatted to avoid evaluation errors.</remarks>
+        /// <param name="tokens">The list of tokens representing the mathematical expression to evaluate. Each token
+        /// must be valid and correspond to the expected syntax of the expression.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
-        public static double HandleFromString(string expressionString)
-        {
-            var tokens = Tokenizer.Tokenize(expressionString);
-            var expressionBuilder = new ExpressionBuilder();
-            var expression = expressionBuilder.BuildExpression(tokens);
-            var result = expression.Evaluate();
-            return result;
-        }
+        public static double Evaluate(IReadOnlyList<Token> tokens)
+            => new ExpressionBuilder()
+                .BuildExpression(tokens)
+                .Evaluate();
     }
 }
