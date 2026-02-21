@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="src/DiceMathsters.Application/DiceMathsters.Application.csproj" Id="ecad0033-a504-4461-b105-750ac145922c" />
   <Project Path="src/DiceMathsters.MathCore/DiceMathsters.MathCore.csproj" />
   <Project Path="tests/DiceMathsters.MathCore.Tests/DiceMathsters.MathCore.Tests.csproj" />
   <Project Path="tools/DiceMathsters.TestBench/DiceMathsters.Testbench.csproj" />
