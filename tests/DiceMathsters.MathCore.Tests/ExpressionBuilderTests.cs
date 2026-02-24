@@ -1,7 +1,7 @@
 ﻿using DiceMathsters.Core;
 using Xunit;
 
-namespace DiceMathstersMathCoreTests
+namespace DiceMathsters.MathCore.Tests
 {
     public class ExpressionBuilderTests
     {

@@ -1,6 +1,6 @@
 ﻿using DiceMathsters.Application;
 
-namespace DiceMathstersMathCoreTestbench
+namespace DiceMathsters.MathCore.Testbench
 {
     internal class Program
     {
