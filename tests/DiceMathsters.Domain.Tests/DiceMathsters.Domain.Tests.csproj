@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\DiceMathsters.MathCore\DiceMathsters.MathCore.csproj" />
+    <ProjectReference Include="..\..\src\DiceMathsters.Domain\DiceMathsters.Domain.csproj" />
   </ItemGroup>
 
 </Project>

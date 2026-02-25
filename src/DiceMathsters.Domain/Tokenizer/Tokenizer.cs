@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DiceMathsters.Core
+namespace DiceMathsters.Domain.Tokenizer
 {
     public class Tokenizer
     {

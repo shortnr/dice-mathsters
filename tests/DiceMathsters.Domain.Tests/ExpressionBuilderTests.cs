@@ -1,4 +1,4 @@
-﻿using DiceMathsters.Core;
+﻿using DiceMathsters.Domain;
 using Xunit;
 
 namespace DiceMathsters.MathCore.Tests

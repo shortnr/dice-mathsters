@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiceMathsters.Core
+namespace DiceMathsters.Domain.ExpressionBuilder
 {
     public class ParserState
     {

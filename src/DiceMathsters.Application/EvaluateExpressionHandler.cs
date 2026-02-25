@@ -1,4 +1,4 @@
-﻿using DiceMathsters.Core;
+﻿using DiceMathsters.Domain;
 
 namespace DiceMathsters.Application
 {
