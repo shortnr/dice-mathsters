@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using DiceMathsters.Domain.Expressions;
+using DiceMathsters.Domain.Exceptions;
 
 namespace DiceMathsters.Domain.Tokenizer
 {
@@ -67,7 +68,7 @@ namespace DiceMathsters.Domain.Tokenizer
                 }
                 else
                 {
-                    throw new Exception($"Unexpected character: {current}");
+                    throw new ExpressionException($"Unexpected character: {current}");
                 }
             }
 

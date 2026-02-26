@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DiceMathsters.Domain.Exceptions;
 using DiceMathsters.Domain.Expressions;
 
 namespace DiceMathsters.Domain.Expressions
@@ -61,7 +62,7 @@ namespace DiceMathsters.Domain.Expressions
             if (Current.Type == type)
                 return Advance();
 
-            throw new Exception(errorMessage);
+            throw new ExpressionException(errorMessage);
         }
 
         public bool Done => Position >= _tokens.Count - 1;
@@ -76,7 +77,7 @@ namespace DiceMathsters.Domain.Expressions
             var expr = ParseExpression(state);
 
             if (!state.Done)
-                throw new Exception("Unexpected tokens at end.");
+                throw new ExpressionException("Unexpected tokens at end.");
 
             return expr;
         }
@@ -166,7 +167,7 @@ namespace DiceMathsters.Domain.Expressions
                 return expr;
             }
 
-            throw new Exception("Unexpected token.");
+            throw new ExpressionException("Unexpected token.");
         }
     }
 }
