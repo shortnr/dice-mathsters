@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DiceMathsters.Domain.Expressions;
 
 namespace DiceMathsters.Domain.ExpressionBuilder
 {
@@ -66,7 +67,7 @@ namespace DiceMathsters.Domain.ExpressionBuilder
         public bool Done => Position >= _tokens.Count - 1;
     }
 
-    public class ExpressionBuilder
+    public class ExpressionTreeBuilder
     {
         public MathExpression BuildExpression(IReadOnlyList<Token> tokens)
         {

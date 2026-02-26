@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DiceMathsters.Domain.ExpressionBuilder;
-
-namespace DiceMathsters.Domain.Tokenizer
+﻿namespace DiceMathsters.Domain.Expressions
 {
     public enum TokenType
     {

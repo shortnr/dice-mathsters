@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DiceMathsters.Domain.Expressions;
 
 namespace DiceMathsters.Domain.Tokenizer
 {
-    public class Tokenizer
+    public class StringTokenizer
     {
         public static IReadOnlyList<Token> Tokenize(string expression)
         {

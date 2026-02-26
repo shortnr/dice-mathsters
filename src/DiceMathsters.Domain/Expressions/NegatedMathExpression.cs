@@ -1,4 +1,4 @@
-﻿namespace DiceMathsters.Domain.ExpressionBuilder
+﻿namespace DiceMathsters.Domain.Expressions
 {
     public class NegatedMathExpression : MathExpression
     {

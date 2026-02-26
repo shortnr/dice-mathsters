@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiceMathsters.Domain.ExpressionBuilder
+namespace DiceMathsters.Domain.Expressions
 {
     public class BinaryMathExpression : MathExpression
     {
