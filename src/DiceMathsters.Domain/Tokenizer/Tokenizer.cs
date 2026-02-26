@@ -5,9 +5,9 @@ using DiceMathsters.Domain.Expressions;
 
 namespace DiceMathsters.Domain.Tokenizer
 {
-    public class StringTokenizer
+    internal class StringTokenizer
     {
-        public static IReadOnlyList<Token> Tokenize(string expression)
+        internal static IReadOnlyList<Token> Tokenize(string expression)
         {
             List<Token> _tokens = new();
 

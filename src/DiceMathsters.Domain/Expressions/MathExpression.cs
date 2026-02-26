@@ -9,8 +9,8 @@
         Power
     }
 
-    public abstract class MathExpression
+    internal abstract class MathExpression
     {
-        public abstract double Evaluate();
+        internal abstract double Evaluate();
     }
 }

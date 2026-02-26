@@ -1,8 +1,7 @@
 ﻿using DiceMathsters.Domain.Expressions;
-using DiceMathsters.Domain.Tokenizer;
-using DiceMathsters.Domain.ExpressionBuilder;
+using System.Linq.Expressions;
 
-namespace DiceMathsters.Application
+namespace DiceMathsters.Application.Handlers
 {
     /// <summary>
     /// Provides static methods for evaluating mathematical expressions represented as strings or token lists.
@@ -10,7 +9,7 @@ namespace DiceMathsters.Application
     /// <remarks>Use the Evaluate methods to compute the result of an expression. The input expression must be
     /// valid; otherwise, exceptions may be thrown during evaluation. This class is thread-safe and can be used
     /// concurrently across multiple threads.</remarks>
-    public static class ExpressionEvaluator
+    public static class EvaluateExpressionHandler
     {
         /// <summary>
         /// Evaluates a mathematical expression represented as a string and returns the computed result as a double.
@@ -21,7 +20,7 @@ namespace DiceMathsters.Application
         /// the syntax rules supported by the tokenizer.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
         public static double Evaluate(string expression)
-            => Evaluate(StringTokenizer.Tokenize(expression));
+            => new ExpressionEvaluator().EvaluateExpression(expression);
 
         /// <summary>
         /// Evaluates a mathematical expression represented by a list of tokens and returns the computed result.
@@ -32,8 +31,6 @@ namespace DiceMathsters.Application
         /// must be valid and correspond to the expected syntax of the expression.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
         public static double Evaluate(IReadOnlyList<Token> tokens)
-            => new ExpressionTreeBuilder()
-                .BuildExpression(tokens)
-                .Evaluate();
+            => new ExpressionEvaluator().EvaluateExpression(tokens);
     }
 }

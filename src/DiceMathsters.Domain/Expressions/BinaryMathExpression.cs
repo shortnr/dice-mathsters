@@ -2,22 +2,20 @@
 
 namespace DiceMathsters.Domain.Expressions
 {
-    public class BinaryMathExpression : MathExpression
+    internal class BinaryMathExpression : MathExpression
     {
         private readonly OperatorType type;
         private readonly MathExpression opA;
         private readonly MathExpression opB;
 
-        public double Result { get; set; }
-
-        public BinaryMathExpression(OperatorType type, MathExpression opA, MathExpression opB)
+        internal BinaryMathExpression(OperatorType type, MathExpression opA, MathExpression opB)
         {
             this.type = type;
             this.opA = opA;
             this.opB = opB;
         }
 
-        public override double Evaluate()
+        internal override double Evaluate()
         {
             double resA = opA.Evaluate();
             double resB = opB.Evaluate();

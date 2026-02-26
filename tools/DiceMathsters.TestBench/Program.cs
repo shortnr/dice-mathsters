@@ -1,4 +1,4 @@
-﻿using DiceMathsters.Application;
+﻿using DiceMathsters.Application.Handlers;
 
 namespace DiceMathsters.Testbench
 {
@@ -7,7 +7,7 @@ namespace DiceMathsters.Testbench
         static void Main()
         {
             string expressionString = "-(3 * (4 + 2))";
-            double result = ExpressionEvaluator.Evaluate(expressionString);
+            double result = EvaluateExpressionHandler.Evaluate(expressionString);
             Console.WriteLine($"Result of '{expressionString}' is: {result}");
         }
     }

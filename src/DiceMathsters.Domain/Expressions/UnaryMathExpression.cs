@@ -1,14 +1,14 @@
 ﻿namespace DiceMathsters.Domain.Expressions
 {
-    public class UnaryMathExpression : MathExpression
+    internal class UnaryMathExpression : MathExpression
     {
-        public float Value { get; }
+        internal float Value { get; }
 
-        public UnaryMathExpression(int value)
+        internal UnaryMathExpression(int value)
         {
             Value = value;
         }
 
-        public override double Evaluate() => Value;
+        internal override double Evaluate() => Value;
     }
 }
