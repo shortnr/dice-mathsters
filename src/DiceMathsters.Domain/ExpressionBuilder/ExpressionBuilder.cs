@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using DiceMathsters.Domain.Expressions;
 
-namespace DiceMathsters.Core
+namespace DiceMathsters.Domain.ExpressionBuilder
 {
     public class ParserState
     {
@@ -66,7 +67,7 @@ namespace DiceMathsters.Core
         public bool Done => Position >= _tokens.Count - 1;
     }
 
-    public class ExpressionBuilder
+    public class ExpressionTreeBuilder
     {
         public MathExpression BuildExpression(IReadOnlyList<Token> tokens)
         {

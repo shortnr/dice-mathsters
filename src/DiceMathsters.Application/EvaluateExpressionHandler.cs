@@ -1,4 +1,6 @@
-﻿using DiceMathsters.Core;
+﻿using DiceMathsters.Domain.Expressions;
+using DiceMathsters.Domain.Tokenizer;
+using DiceMathsters.Domain.ExpressionBuilder;
 
 namespace DiceMathsters.Application
 {
@@ -19,7 +21,7 @@ namespace DiceMathsters.Application
         /// the syntax rules supported by the tokenizer.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
         public static double Evaluate(string expression)
-            => Evaluate(Tokenizer.Tokenize(expression));
+            => Evaluate(StringTokenizer.Tokenize(expression));
 
         /// <summary>
         /// Evaluates a mathematical expression represented by a list of tokens and returns the computed result.
@@ -30,7 +32,7 @@ namespace DiceMathsters.Application
         /// must be valid and correspond to the expected syntax of the expression.</param>
         /// <returns>The result of the evaluated expression as a double.</returns>
         public static double Evaluate(IReadOnlyList<Token> tokens)
-            => new ExpressionBuilder()
+            => new ExpressionTreeBuilder()
                 .BuildExpression(tokens)
                 .Evaluate();
     }

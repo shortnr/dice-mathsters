@@ -1,4 +1,4 @@
-﻿namespace DiceMathsters.Core
+﻿namespace DiceMathsters.Domain.Expressions
 {
     public class UnaryMathExpression : MathExpression
     {

@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiceMathsters.MathCore\DiceMathsters.MathCore.csproj" />
+    <ProjectReference Include="..\DiceMathsters.Domain\DiceMathsters.Domain.csproj" />
   </ItemGroup>
 
 </Project>
