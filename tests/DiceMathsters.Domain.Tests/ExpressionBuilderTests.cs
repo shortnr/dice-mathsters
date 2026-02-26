@@ -1,6 +1,4 @@
 ﻿using DiceMathsters.Domain.Expressions;
-using DiceMathsters.Domain.Tokenizer;
-using DiceMathsters.Domain.ExpressionBuilder;
 
 using Xunit;
 
@@ -128,10 +126,7 @@ namespace DiceMathsters.Domain.Tests
         [InlineData("2^")]
         public void ExpressionBuilder_InvalidExpressions(string expressionString)
         {
-            IReadOnlyList<Token> tokens = StringTokenizer.Tokenize(expressionString);
-            ExpressionTreeBuilder builder = new();
-
-            Assert.Throws<Exception>(() => builder.BuildExpression(tokens));
+            Assert.Throws<Exception>(() => new ExpressionEvaluator().EvaluateExpression(expressionString));
         }
 
 
@@ -141,11 +136,7 @@ namespace DiceMathsters.Domain.Tests
 
         private static void EvaluateAndAssert(string expressionString, double expected)
         {
-            IReadOnlyList<Token> tokens = StringTokenizer.Tokenize(expressionString);
-            ExpressionTreeBuilder builder = new();
-            MathExpression expression = builder.BuildExpression(tokens);
-
-            Assert.Equal(expected, expression.Evaluate(), 10);
+            Assert.Equal(expected, new ExpressionEvaluator().EvaluateExpression(expressionString), 10);
         }
     }
 }

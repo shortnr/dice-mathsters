@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using DiceMathsters.Domain.Expressions;
 
-namespace DiceMathsters.Domain.ExpressionBuilder
+namespace DiceMathsters.Domain.Expressions
 {
-    public class ParserState
+    internal class ParserState
     {
         private readonly IReadOnlyList<Token> _tokens;
         public int Position { get; private set; } = 0;
@@ -67,9 +67,9 @@ namespace DiceMathsters.Domain.ExpressionBuilder
         public bool Done => Position >= _tokens.Count - 1;
     }
 
-    public class ExpressionTreeBuilder
+    internal class ExpressionBuilder
     {
-        public MathExpression BuildExpression(IReadOnlyList<Token> tokens)
+        internal MathExpression Build(IReadOnlyList<Token> tokens)
         {
             var state = new ParserState(tokens);
 
