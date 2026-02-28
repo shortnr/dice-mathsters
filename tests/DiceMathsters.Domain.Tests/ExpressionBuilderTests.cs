@@ -1,4 +1,5 @@
 ﻿using DiceMathsters.Domain.Expressions;
+using DiceMathsters.Domain.Exceptions;
 
 using Xunit;
 
@@ -126,7 +127,7 @@ namespace DiceMathsters.Domain.Tests
         [InlineData("2^")]
         public void ExpressionBuilder_InvalidExpressions(string expressionString)
         {
-            Assert.Throws<Exception>(() => new ExpressionEvaluator().EvaluateExpression(expressionString));
+            Assert.Throws<ExpressionException>(() => new ExpressionEvaluator().EvaluateExpression(expressionString));
         }
 
 
