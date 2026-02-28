@@ -2,7 +2,7 @@
 
 namespace DiceMathsters.Domain.Exceptions
 {
-    internal class ExpressionException : Exception
+    public class ExpressionException : Exception
     {
         public ExpressionException(string message) : base(message) { }
     }
