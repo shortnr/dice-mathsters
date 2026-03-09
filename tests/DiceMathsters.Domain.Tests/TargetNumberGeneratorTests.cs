@@ -6,7 +6,7 @@ using DiceMathsters.Domain.Game;
 using DiceMathsters.Domain.Random;
 using Xunit;
 
-namespace DiceMathsters.Domain.Tests
+namespace DiceMathsters.Domain.Tests.Game
 {
     public class TargetNumberGeneratorTests
     {

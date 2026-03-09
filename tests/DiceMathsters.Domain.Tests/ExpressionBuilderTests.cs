@@ -3,7 +3,7 @@ using DiceMathsters.Domain.Exceptions;
 
 using Xunit;
 
-namespace DiceMathsters.Domain.Tests
+namespace DiceMathsters.Domain.Tests.Expressions
 {
     public class ExpressionBuilderTests
     {
