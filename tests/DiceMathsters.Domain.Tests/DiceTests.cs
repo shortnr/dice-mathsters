@@ -4,7 +4,7 @@ using DiceMathsters.Domain.Dice;
 using DiceMathsters.Domain.Random;
 using Xunit;
 
-namespace DiceMathsters.Domain.Tests
+namespace DiceMathsters.Domain.Tests.Dice
 {
     public class DiceTests
     {
