@@ -1,6 +1,6 @@
 # 🎲 Dice Mathsters
 
-A multiplayer math game platform for K–12 classrooms, where students 
+A multiplayer math game platform for 3–8 classrooms, where students 
 roll polyhedral dice and build mathematical expressions to hit a target 
 number. Designed with Chromebook-friendly deployment in mind.
 
@@ -47,7 +47,7 @@ The project is being built toward a clean layered architecture:
 | Layer | Description | Status |
 |---|---|---|
 | **Domain** | Core game logic, no external dependencies | ✅ Complete |
-| **Application** | Handlers and use cases | ✅ Complete |
+| **Application** | Handlers and use cases | 🚧 Complete |
 | **Infrastructure/Services** | Networking, persistence | 🔲 Planned |
 | **UI** | Student and teacher interfaces | 🔲 Planned |
 
