@@ -47,7 +47,7 @@ The project is being built toward a clean layered architecture:
 | Layer | Description | Status |
 |---|---|---|
 | **Domain** | Core game logic, no external dependencies | ✅ Complete |
-| **Application** | Handlers and use cases | 🚧 Complete |
+| **Application** | Handlers and use cases | 🚧 In Progress |
 | **Infrastructure/Services** | Networking, persistence | 🔲 Planned |
 | **UI** | Student and teacher interfaces | 🔲 Planned |
 
