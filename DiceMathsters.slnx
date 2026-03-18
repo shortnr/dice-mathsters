@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="src/DiceMathsters.Application/DiceMathsters.Application.csproj" Id="ecad0033-a504-4461-b105-750ac145922c" />
   <Project Path="src/DiceMathsters.Domain/DiceMathsters.Domain.csproj" />
+  <Project Path="tests/DiceMathsters.Application.Tests/DiceMathsters.Application.Tests.csproj" Id="9954d570-19b9-430a-a0c7-e093812538df" />
   <Project Path="tests/DiceMathsters.Domain.Tests/DiceMathsters.Domain.Tests.csproj" />
   <Project Path="tools/DiceMathsters.TestBench/DiceMathsters.Testbench.csproj" />
 </Solution>
